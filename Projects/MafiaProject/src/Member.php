@@ -2,7 +2,6 @@
 
 namespace MafiaProject;
 
-
 class Member
 {
     /** must be unique */
