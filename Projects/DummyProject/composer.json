@@ -1,0 +1,20 @@
+{
+  "name": "jeslopcru/php-coding-dojo",
+  "license": "MIT",
+  "type": "project",
+  "description": "Empty project which can be used in a PHP and PHPUnit-oriented coding dojo - kata",
+  "autoload": {
+    "psr-4": {
+        "DummyProject": "projects/DummyProject/src",
+        "DummyProject\\Test": "projects/DummyProject/test"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.0.*",
+    "mockery/mockery": "0.*",
+    "phpspec/prophecy-phpunit": "1.1.*",
+    "squizlabs/php_codesniffer": "~1.5",
+    "object-calisthenics/phpcs-calisthenics-rules": "dev-master",
+    "fabpot/php-cs-fixer": "1.10.*"
+  }
+}
