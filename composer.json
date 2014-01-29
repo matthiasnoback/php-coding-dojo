@@ -1,0 +1,12 @@
+{
+    "name": "matthiasnoback/php-coding-dojo",
+    "license": "MIT",
+    "type": "project",
+    "description": "Empty project which can be used in a PHP and PHPUnit-oriented coding dojo",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "phpunit/phpunit": "~3.7"
+    }
+}
