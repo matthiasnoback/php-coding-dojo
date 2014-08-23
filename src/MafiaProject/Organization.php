@@ -2,7 +2,6 @@
 
 namespace MafiaProject;
 
-
 class Organization
 {
     const NUMBER_SUBORDINATES_TO_BE_IMPORTANT = 50;
