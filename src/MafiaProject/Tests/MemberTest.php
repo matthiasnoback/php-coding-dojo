@@ -19,11 +19,13 @@ class MemberTest extends \PHPUnit_Framework_TestCase
 
     public function testAddSubordinateMemberOk()
     {
+        //given
         $bossMember = new Member('Joselito', 40, true);
         $subordinateMember = new Member('Pepe', 20, true);
-
+        //when
         $bossMember->addSubordinate($subordinateMember);
-        $this->assertCount(1, $bossMember->getSubordinates(), 'El jefe debe tener subordinado');
+        //then
+        $this->assertCount(1, $bossMember->getSubordinates());
         $this->assertSame($bossMember, $subordinateMember->getBoss());
     }
 
@@ -31,7 +33,6 @@ class MemberTest extends \PHPUnit_Framework_TestCase
     {
         $memberToTest = new Member('Joselito', 35);
         $this->assertSame(0, $memberToTest->getNumberOfSubordinates());
-
         $subordinateMember = new Member('Pepe', 20, true);
         $memberToTest->addSubordinate($subordinateMember);
         $this->assertSame(0, $subordinateMember->getNumberOfSubordinates());
@@ -42,8 +43,7 @@ class MemberTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(1, $subordinateMember->getNumberOfSubordinates());
         $this->assertSame(
             2,
-            $memberToTest->getNumberOfSubordinates(),
-            'Los subordinados de los subordinados tambien cuentan'
+            $memberToTest->getNumberOfSubordinates()
         );
 
         $subordinateMember2 = new Member('Carlos', 25, true);

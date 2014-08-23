@@ -78,16 +78,20 @@ class OrganizationTest extends \PHPUnit_Framework_TestCase
 
     public function testMemberGoToJailAndAddSubordinatesToOldBoss()
     {
+        //when
         $this->myOrganization->goToJail($this->member1);
-
+        //then
         $this->assertFalse($this->member1->getIsFree());
         $this->assertCount(5, $this->member3->getSubordinates());
     }
 
     public function testMemberGoToJailAndAddSubordinatesPromotes()
     {
+        //given
         $this->assertCount(0, $this->member11->getSubordinates());
+        //when
         $this->myOrganization->goToJail($this->member6);
+        //then
         $this->assertFalse($this->member6->getIsFree());
         $this->assertNotSame($this->member6->getName(), $this->member11->getName());
         $this->assertCount(1, $this->member11->getSubordinates());
@@ -95,11 +99,13 @@ class OrganizationTest extends \PHPUnit_Framework_TestCase
 
     public function testMemberReleasedFromJailOldBoss()
     {
+        //given
         $this->myOrganization->goToJail($this->member1);
         $this->assertCount(5, $this->member3->getSubordinates());
         $this->assertFalse($this->member1->getIsFree());
-
+        //when
         $this->myOrganization->releasedFromJail($this->member1);
+        //then
         $this->assertTrue($this->member1->getIsFree());
         $this->assertCount(3, $this->member3->getSubordinates());
         $this->assertSame($this->member1, $this->member4->getBoss());
@@ -108,13 +114,15 @@ class OrganizationTest extends \PHPUnit_Framework_TestCase
 
     public function testMemberReleasedFromJailAndAddSubordinatesDownGrade()
     {
+        //given
         $this->assertCount(0, $this->member11->getSubordinates());
         $this->myOrganization->goToJail($this->member6);
         $this->assertFalse($this->member6->getIsFree());
         $this->assertNotSame($this->member6->getName(), $this->member11->getName());
         $this->assertCount(1, $this->member11->getSubordinates());
-
+        //when
         $this->myOrganization->releasedFromJail($this->member6);
+        //then
         $this->assertCount(0, $this->member11->getSubordinates());
         $this->assertCount(0, $this->member10->getSubordinates());
     }
