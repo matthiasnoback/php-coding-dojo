@@ -117,9 +117,13 @@ class OrganizationTest extends \PHPUnit_Framework_TestCase
         $this->myOrganization->releasedFromJail($this->member6);
         $this->assertCount(0, $this->member11->getSubordinates());
         $this->assertCount(0, $this->member10->getSubordinates());
-
-
     }
 
+    public function testCompareMembers()
+    {
+        $this->assertSame(1, $this->myOrganization->compareMembers($this->member1, $this->member10));
+        $this->assertSame(0, $this->myOrganization->compareMembers($this->member1, $this->member3));
+        $this->assertSame(-1, $this->myOrganization->compareMembers($this->member11, $this->member2));
+    }
 
 }

@@ -97,6 +97,29 @@ class Organization
             $memberNeedChangeBoss->getBoss()->setSubordinates($actuaSubordinateMembers);
             $memberNeedChangeBoss->setBoss($member);
         }
+    }
+
+    public function compareMembers(Member $memberA, Member $memberB)
+    {
+        $a = $this->getRankOfMember($memberA);
+        $b = $this->getRankOfMember($memberB);
+        if ($a < $b) {
+            return 1;
+        } elseif ($a > $b) {
+            return -1;
+        } else {
+            return 0;
+        }
+
+    }
+
+    protected function getRankOfMember(Member $member)
+    {
+        if (is_null($member->getBoss())) {
+            return 1;
+        } else {
+            return 1 + $this->getRankOfMember($member->getBoss());
+        }
 
     }
 }
