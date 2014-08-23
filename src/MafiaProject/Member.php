@@ -5,12 +5,14 @@ namespace MafiaProject;
 
 class Member
 {
+    /** must be unique */
     protected $name;
     protected $age;
     protected $isFree;
     protected $subordinates = [];
     /** @var  Member */
     protected $boss;
+    protected $numberOfSubordinates;
 
     public function __construct($name, $age, $isFree = true, $subordinates = [])
     {
@@ -18,6 +20,29 @@ class Member
         $this->age = (int)$age;
         $this->isFree = (bool)$isFree;
         $this->subordinates = $subordinates;
+        $this->numberOfSubordinates = $this->getNumberOfSubordinates();
+    }
+
+    public function getNumberOfSubordinates()
+    {
+        $subordinates = $this->getSubordinates();
+        $numberSubordinates = count($subordinates);
+        /** @var Member $member */
+        $member = null;
+        foreach ($subordinates as $member) {
+            $numberSubordinates += count($member->getSubordinates());
+        }
+        return $numberSubordinates;
+    }
+
+    public function getSubordinates()
+    {
+        return $this->subordinates;
+    }
+
+    public function isImportantMember()
+    {
+        return $this->getNumberOfSubordinates() > 50;
     }
 
     public function addSubordinate(Member $member)
@@ -31,14 +56,14 @@ class Member
         return $this->age;
     }
 
-    public function setBoss($boss)
-    {
-        $this->boss = $boss;
-    }
-
     public function getBoss()
     {
         return $this->boss;
+    }
+
+    public function setBoss($boss)
+    {
+        $this->boss = $boss;
     }
 
     public function getIsFree()
@@ -50,10 +75,4 @@ class Member
     {
         return $this->name;
     }
-
-    public function getSubordinates()
-    {
-        return $this->subordinates;
-    }
-
 }
