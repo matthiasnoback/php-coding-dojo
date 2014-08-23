@@ -82,4 +82,21 @@ class Organization
         }
     }
 
+    public function releasedFromJail(Member $member)
+    {
+        $member->setIsFree(true);
+        foreach ($member->getSubordinates() as $KeyMemberNeedChangeBoss => $memberNeedChangeBoss) {
+            /** @var $memberNeedChangeBoss Member */
+            $actuaSubordinateMembers = $memberNeedChangeBoss->getBoss()->getSubordinates();
+            foreach ($actuaSubordinateMembers as $actualMember) {
+                /** @var $actualMember Member */
+                if (strcmp($actualMember->getName(), $memberNeedChangeBoss->getName()) === 0) {
+                    unset($actuaSubordinateMembers[$KeyMemberNeedChangeBoss]);
+                }
+            }
+            $memberNeedChangeBoss->getBoss()->setSubordinates($actuaSubordinateMembers);
+            $memberNeedChangeBoss->setBoss($member);
+        }
+
+    }
 }

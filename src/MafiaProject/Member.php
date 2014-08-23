@@ -40,6 +40,11 @@ class Member
         return $this->subordinates;
     }
 
+    public function setSubordinates($subordinates)
+    {
+        $this->subordinates = $subordinates;
+    }
+
     public function getBoss()
     {
         return $this->boss;

@@ -92,18 +92,34 @@ class OrganizationTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame($this->member6->getName(), $this->member11->getName());
         $this->assertCount(1, $this->member11->getSubordinates());
     }
-//
-//    public function testMemberReleasedFromJailOldBoss()
-//    {
-//        $this->member1->goToJail();
-//        $this->assertCount(5, $this->member3->getSubordinates());
-//        $this->assertFalse($this->member1->getIsFree());
-//
-//        $this->member1->releasedFromJail();
-//        $this->assertTrue($this->member1->getIsFree());
-//        $this->assertCount(3, $this->member3->getSubordinates());
-//        $this->assertSame($this->member1, $this->member4->getBoss());
-//        $this->assertSame($this->member1, $this->member5->getBoss());
-//
-//    }
+
+    public function testMemberReleasedFromJailOldBoss()
+    {
+        $this->myOrganization->goToJail($this->member1);
+        $this->assertCount(5, $this->member3->getSubordinates());
+        $this->assertFalse($this->member1->getIsFree());
+
+        $this->myOrganization->releasedFromJail($this->member1);
+        $this->assertTrue($this->member1->getIsFree());
+        $this->assertCount(3, $this->member3->getSubordinates());
+        $this->assertSame($this->member1, $this->member4->getBoss());
+        $this->assertSame($this->member1, $this->member5->getBoss());
+    }
+
+    public function testMemberReleasedFromJailAndAddSubordinatesDownGrade()
+    {
+        $this->assertCount(0, $this->member11->getSubordinates());
+        $this->myOrganization->goToJail($this->member6);
+        $this->assertFalse($this->member6->getIsFree());
+        $this->assertNotSame($this->member6->getName(), $this->member11->getName());
+        $this->assertCount(1, $this->member11->getSubordinates());
+
+        $this->myOrganization->releasedFromJail($this->member6);
+        $this->assertCount(0, $this->member11->getSubordinates());
+        $this->assertCount(0, $this->member10->getSubordinates());
+
+
+    }
+
+
 }
