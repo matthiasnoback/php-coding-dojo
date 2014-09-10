@@ -7,8 +7,9 @@ use CalculatorProject\Calculator;
 class CalculatorTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testInstance()
+    public function testResultDefaultsToZero()
     {
-        new Calculator();
+        $calc = new Calculator();
+        $this->assertSame(0, $calc->getResult());
     }
 }
