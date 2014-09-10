@@ -1,6 +1,7 @@
 # PHP coding dojo project
 
 ## Code Katas:
+- Calculator
 - FizzBuzz
 - FizBuzz Extra
 - Mafia
@@ -49,3 +50,4 @@ as a quick reference for PHPUnit usage.
 ##Solutions
 
 - Mafia
+- Calculator -> Solo la mitad
