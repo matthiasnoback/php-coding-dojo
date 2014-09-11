@@ -6,9 +6,14 @@ class Calculator
 {
     protected $result = 0;
 
-    public function add($number)
+    public function add()
     {
-        $this->result = $this->result + $number;
+        foreach (func_get_args() as $number) {
+            if (!is_numeric($number)) {
+                throw new \InvalidArgumentException;
+            }
+            $this->result = $this->result + $number;
+        }
     }
 
     public function getResult()
