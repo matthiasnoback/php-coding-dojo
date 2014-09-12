@@ -41,4 +41,11 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(9, $this->calc->getResult());
         $this->assertNotEquals('Esto es una cadena', $this->getResult());
     }
+
+    public function testSubtractNumber()
+    {
+        $this->calc->subtract(4);
+
+        $this->assertEquals(-4, $this->calc->getResult());
+    }
 }
