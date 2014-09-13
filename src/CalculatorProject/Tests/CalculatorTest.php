@@ -4,6 +4,7 @@ namespace CalculatorProject\Tests;
 
 use CalculatorProject\Addition;
 use CalculatorProject\Calculator;
+use CalculatorProject\Multiplication;
 use InvalidArgumentException;
 
 class CalculatorTest extends \PHPUnit_Framework_TestCase
@@ -52,5 +53,16 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
         //Then
         $this->assertEquals(9, $this->calc->getResult());
         $this->assertNotEquals('Esto es una cadena', $this->getResult());
+    }
+
+    public function testMultipiesNumbers()
+    {
+        //Given
+        $this->calc->setOperands(2, 2, 3);
+        $this->calc->setOperation(new Multiplication());
+        //When
+        $result = $this->calc->calculate();
+        //Then
+        $this->assertSame(12, $result);
     }
 }
