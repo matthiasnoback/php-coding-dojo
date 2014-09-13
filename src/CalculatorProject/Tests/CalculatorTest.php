@@ -15,15 +15,25 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
         $this->calc = new Calculator();
     }
 
-    public function testResultDefaultsToZero()
+    public function testResultDefaultsToNull()
     {
-        $this->assertSame(0, $this->calc->getResult());
+        $this->assertNull($this->calc->getResult());
     }
 
-    public function testAddNumber()
+    public function testAddNumbers()
     {
-        $this->calc->add(7);
-        $this->assertSame(7, $this->calc->getResult());
+        //Given
+        $mock = \Mockery::mock('CalculatorProject\Addition');
+        $mock->shouldReceive('run')
+            ->once()
+            ->with(7, 0)
+            ->andReturn(7);
+        $this->calc->setOperands(7);
+        $this->calc->setOperation($mock);
+        //When
+        $result = $this->calc->calculate();
+        //Then
+        $this->assertSame(7, $result);
     }
 
     /**
@@ -31,21 +41,25 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testRequiresNumericValues()
     {
-        $this->calc->add('four');
+        $mock = \Mockery::mock('CalculatorProject\Addition');
+        $this->calc->setOperands('four');
+        $this->calc->setOperation($mock);
+        $this->calc->calculate();
     }
 
     public function testAcceptsMultipleArgs()
     {
-        $this->calc->add(2, 4, 3);
-
+        //Given
+        $mock = \Mockery::mock('CalculatorProject\Addition');
+        $mock->shouldReceive('run')
+            ->once()
+            ->andReturn(9);
+        $this->calc->setOperands(2, 3, 4);
+        $this->calc->setOperation($mock);
+        //When
+        $this->calc->calculate();
+        //Then
         $this->assertEquals(9, $this->calc->getResult());
         $this->assertNotEquals('Esto es una cadena', $this->getResult());
-    }
-
-    public function testSubtractNumber()
-    {
-        $this->calc->subtract(4);
-
-        $this->assertEquals(-4, $this->calc->getResult());
     }
 }

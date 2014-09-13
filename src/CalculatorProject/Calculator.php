@@ -6,44 +6,36 @@ use InvalidArgumentException;
 
 class Calculator
 {
-    protected $result = 0;
-
-    public function add()
-    {
-        $this->calculateAll(func_get_args(), '+');
-    }
-
-    protected function calculateAll(array $numbers, $symbol)
-    {
-        foreach ($numbers as $num) {
-            $this->calculate($num, $symbol);
-        }
-    }
-
-    protected function calculate($num, $symbol)
-    {
-        if (!is_numeric($num)) {
-            throw new InvalidArgumentException;
-        }
-
-        switch ($symbol) {
-            case '+':
-                $this->result += $num;
-                break;
-
-            case '-':
-                $this->result -= $num;
-                break;
-        }
-    }
-
-    public function subtract()
-    {
-        $this->calculateAll(func_get_args(), '-');
-    }
+    protected $result = null;
+    protected $operands = [];
+    /** @var  Operation */
+    protected $operation;
 
     public function getResult()
     {
+        return $this->result;
+    }
+
+    public function setOperation(Operation $operation)
+    {
+        $this->operation = $operation;
+    }
+
+    public function setOperands($operands)
+    {
+        $this->operands = func_get_args();
+    }
+
+    public function calculate()
+    {
+        foreach ($this->operands as $number) {
+            if (!is_numeric($number)) {
+                throw new InvalidArgumentException();
+            }
+
+            $this->result = $this->operation->run($number, $this->result);
+        }
+
         return $this->result;
     }
 }
