@@ -50,4 +50,4 @@ as a quick reference for PHPUnit usage.
 ##Solutions
 
 - Mafia
-- Calculator -> Solo la mitad
+- Calculator -> 2 versiones (con Mock y sin Mock)
