@@ -2,7 +2,6 @@
 
 namespace CalculatorProject;
 
-
 class Multiplication implements Operation
 {
     public function run($num, $current)
