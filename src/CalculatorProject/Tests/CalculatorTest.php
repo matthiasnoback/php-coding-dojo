@@ -2,9 +2,7 @@
 
 namespace CalculatorProject\Tests;
 
-use CalculatorProject\Addition;
 use CalculatorProject\Calculator;
-use CalculatorProject\Multiplication;
 use InvalidArgumentException;
 
 class CalculatorTest extends \PHPUnit_Framework_TestCase
@@ -22,11 +20,16 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->calc->getResult());
     }
 
-    public function testAddNumber()
+    public function testAddNumbers()
     {
         //Given
+        $mock = \Mockery::mock('CalculatorProject\Addition');
+        $mock->shouldReceive('run')
+            ->once()
+            ->with(7, 0)
+            ->andReturn(7);
         $this->calc->setOperands(7);
-        $this->calc->setOperation(new Addition());
+        $this->calc->setOperation($mock);
         //When
         $result = $this->calc->calculate();
         //Then
@@ -38,31 +41,25 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testRequiresNumericValues()
     {
+        $mock = \Mockery::mock('CalculatorProject\Addition');
         $this->calc->setOperands('four');
-        $this->calc->setOperation(new Addition());
+        $this->calc->setOperation($mock);
         $this->calc->calculate();
     }
 
     public function testAcceptsMultipleArgs()
     {
         //Given
+        $mock = \Mockery::mock('CalculatorProject\Addition');
+        $mock->shouldReceive('run')
+            ->once()
+            ->andReturn(9);
         $this->calc->setOperands(2, 3, 4);
-        $this->calc->setOperation(new Addition());
+        $this->calc->setOperation($mock);
         //When
         $this->calc->calculate();
         //Then
         $this->assertEquals(9, $this->calc->getResult());
         $this->assertNotEquals('Esto es una cadena', $this->getResult());
-    }
-
-    public function testMultipiesNumbers()
-    {
-        //Given
-        $this->calc->setOperands(2, 2, 3);
-        $this->calc->setOperation(new Multiplication());
-        //When
-        $result = $this->calc->calculate();
-        //Then
-        $this->assertSame(12, $result);
     }
 }
