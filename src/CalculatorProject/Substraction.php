@@ -9,6 +9,7 @@ class Substraction implements Operation
         if (is_null($current)) {
             return $num;
         }
+
         return $current - $num;
     }
-} 
+}

@@ -2,7 +2,6 @@
 
 namespace CalculatorProject\Tests;
 
-
 use CalculatorProject\Addition;
 
 class AdditionTest extends \PHPUnit_Framework_TestCase
