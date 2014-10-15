@@ -60,6 +60,6 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
         $this->calc->calculate();
         //Then
         $this->assertEquals(9, $this->calc->getResult());
-        $this->assertNotEquals('Esto es una cadena', $this->getResult());
+        $this->assertNotEquals('This is a string', $this->getResult());
     }
 }
