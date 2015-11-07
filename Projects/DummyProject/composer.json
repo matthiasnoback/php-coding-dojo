@@ -5,12 +5,8 @@
   "description": "Empty project which can be used in a PHP and PHPUnit-oriented coding dojo - kata",
   "autoload": {
     "psr-4": {
-      "DummyProject\\": "projects/DummyProject/src/",
-      "DummyProject\\Test\\": "projects/DummyProject/test/",
-      "CalculatorProject\\": "projects/CalculatorProject/src/",
-      "CalculatorProject\\Test\\": "projects/CalculatorProject/test/",
-      "MafiaProject\\": "projects/MafiaProject/src/",
-      "MafiaProject\\Test\\": "projects/MafiaProject/test/"
+        "DummyProject": "projects/DummyProject/src",
+        "DummyProject\\Test": "projects/DummyProject/test"
     }
   },
   "require-dev": {

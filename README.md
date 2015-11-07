@@ -1,5 +1,14 @@
 # PHP coding dojo project
 
+## Code Katas:
+- Calculator
+- FizzBuzz
+- FizBuzz Extra
+- Mafia
+- Minesweeper
+- Minesweeper Extra
+- Yahtzee
+
 ## Setup
 
 To install the project:
@@ -24,9 +33,7 @@ then select ``Run 'src'``.
 
 ## Run the unit tests
 
-To run all tests in a testcase press ``Ctrl + Shift + F10`` when the cursor is *not* inside a method.
-To run one test press ``Ctrl + Shift + F10`` when the cursor is inside a method.
-To repeat the previous test run press ``Shift + F10``.
+To run all tests in a testcase press ``Cmd + alt + R`` when the cursor is *not* inside a method.
 
 Or you can run the tests from the command-line:
 
@@ -38,3 +45,9 @@ When you first run the tests, PHPStorm might ask you to supply a PHP interpreter
 
 You can use my [PHPUnit cheatsheet](https://github.com/matthiasnoback/workshop-unit-testing/blob/master/cheatsheet.md)
 as a quick reference for PHPUnit usage.
+
+
+##Solutions
+
+- Mafia
+- Calculator -> 2 versiones (con Mock y sin Mock)
